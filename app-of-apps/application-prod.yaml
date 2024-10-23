@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lbfau98ce-nodejs-prod
+  namespace: rhtap
+  finalizers: ["resources-finalizer.argocd.argoproj.io"] 
+spec:
+  project: default
+  source:
+    path: ./components/lbfau98ce-nodejs/overlays/prod
+    repoURL: https://github.com/rhtap-test-organization-jk/lbfau98ce-nodejs-gitops.git
+    targetRevision: main
+  destination:
+    namespace: rhtap-app-prod
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels: 
+        argocd.argoproj.io/managed-by: rhtap
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

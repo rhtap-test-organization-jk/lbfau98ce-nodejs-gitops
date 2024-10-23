@@ -1,0 +1,6 @@
+apiVersion: "pipelinesascode.tekton.dev/v1alpha1"
+kind: Repository
+metadata:
+  name: lbfau98ce-nodejs-repository
+spec:
+  url: https://github.com/rhtap-test-organization-jk/lbfau98ce-nodejs
